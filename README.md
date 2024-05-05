@@ -26,6 +26,6 @@ python convert.py
 这部分代码来自 https://github.com/pagekeytech/onenote-to-markdown 。
 喜欢用powershell脚本的朋友可以使用仓库中的 convert3.ps1 脚本。
 
-# 已知问题
+# Issues
 
 部分OneNote笔记的笔记名包含特殊字符，可能转换失败。因为目标格式是markdown并且以文件、文件夹格式存储，必然受到操作系统对文件名的限制。对于这种情况，我的建议是以后不要在标题里用特殊字符。
