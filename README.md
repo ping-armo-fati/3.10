@@ -17,6 +17,8 @@ pip install -r requirements.txt
 
 ```bash
 python convert.py
+python markdown_image_editor.py
+
 ```
 
 - 你的笔记应该转化成了markdown文件并存在 `~/Desktop/OneNoteExport`. 建议用[obsidian](https://obsidian.md)管理markdown笔记！
