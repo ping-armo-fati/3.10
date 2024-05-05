@@ -2,8 +2,8 @@ import os
 import re
 
 
-root_dir = r"/MDEditor_OneNote2MD\file_source"
-assets_path = r"/MDEditor_OneNote2MD\file_source\assets"
+root_dir = r".\file_source"
+assets_path = r".\file_source\assets"
 markdown_image_pattern = r'!\[(.*?)\]\((.*?)\)'
 
 
@@ -127,6 +127,6 @@ def relative_path(target_path_input, reference_path_input):
 
 # Main
 # run it！
-# process_markdown_files(root_dir, assets_path)
-# clean_unused_images(root_dir, assets_path)
-# rename_image_files_by_alt_text(root_dir, assets_path)
+process_markdown_files(root_dir, assets_path)
+clean_unused_images(root_dir, assets_path)
+rename_image_files_by_alt_text(root_dir, assets_path)
