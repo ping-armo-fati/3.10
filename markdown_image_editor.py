@@ -29,7 +29,7 @@ def process_markdown_files(root_dir_input, assets_path_input):
                         relative_path_to_assets = relative_path(assets_path_input, root)
                         # 拼接新的路径和图片文件名
                         new_img_expr = os.path.join(relative_path_to_assets, img_filename)
-                        new_img_expr = new_img_expr.replace('\\', '/')
+                        # new_img_expr = new_img_expr.replace('\\', '/')
                         print(f"修改为 {new_img_expr}")
                         # 将原图片表达式替换为新的图片表达式
                         content = content.replace(expr[1], new_img_expr)
@@ -78,6 +78,7 @@ def rename_image_files_by_alt_text(root_dir_input, assets_path_input):
                     print(f"读取了文件 {file}")
                     # 查找所有的图片表达式
                     img_expression = re.findall(markdown_image_pattern, content)
+
                     # 遍历所有的图片表达式
                     for expr in img_expression:
                         print(f"查找到图片链接 {expr}")
