@@ -29,7 +29,7 @@ def process_markdown_files(root_dir_input, assets_path_input):
                         relative_path_to_assets = relative_path(assets_path_input, root)
                         # 拼接新的路径和图片文件名
                         new_img_expr = os.path.join(relative_path_to_assets, img_filename)
-                        # new_img_expr = new_img_expr.replace('\\', '/')
+                        new_img_expr = new_img_expr.replace('\\', '/')
                         print(f"修改为 {new_img_expr}")
                         # 将原图片表达式替换为新的图片表达式
                         content = content.replace(expr[1], new_img_expr)
@@ -73,6 +73,7 @@ def rename_image_files_by_alt_text(root_dir_input, assets_path_input):
             if file.endswith('.md'):
                 print("find the " + file)
                 full_path = os.path.join(root, file)
+                file_name = os.path.splitext(file)[0]
                 with open(full_path, 'r', encoding='utf-8') as file_con:
                     content = file_con.read()
                     print(f"读取了文件 {file}")
@@ -88,8 +89,8 @@ def rename_image_files_by_alt_text(root_dir_input, assets_path_input):
                         alt_text = expr[0]
                         # 求相对路径
                         relative_path_to_assets = relative_path(assets_path_input, root)
-                        # 修改图片文件名为 方括号中的文本+原图片文件后缀
-                        new_img_filename = str(img_counter) + "_" + alt_text + os.path.splitext(img_filename)[1]
+                        # 修改图片文件名为 序号+ _ +文件名+方括号中的文本+原图片文件后缀
+                        new_img_filename = str(img_counter) + "_" + file_name + alt_text + os.path.splitext(img_filename)[1]
                         img_counter += 1
                         # 修改图片的url为修改名字后 对应的url
                         new_img_url = os.path.join(relative_path_to_assets, new_img_filename)
@@ -131,4 +132,4 @@ def relative_path(target_path_input, reference_path_input):
 # run it！
 process_markdown_files(root_dir, assets_path)
 clean_unused_images(root_dir, assets_path)
-rename_image_files_by_alt_text(root_dir, assets_path)
+# rename_image_files_by_alt_text(root_dir, assets_path)
