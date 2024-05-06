@@ -144,6 +144,17 @@ python MkDocs_index_system_create.py
 ```python
     if sub_dir.is_dir() and sub_dir.name != 'assets':
 ```
+- Read the Docs 报错
+> ERROR   -  Encoding error reading file: MarkDown_Notes/0.Bullet/1.To-Do-list/index.md
+> 
+> ERROR   -  Error reading page 'MarkDown_Notes/0.Bullet/1.To-Do-list/index.md': 
+> 'utf-8' codec can't decode byte 0xb4 in position 28: invalid start byte 
+>  Traceback (most recent call last):
+
+UTF-8编码报错问题，指定编码格式
+```python
+with open(file_path, 'w', encoding='utf-8') as f:
+```
 
 ##  Reference
 
