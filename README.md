@@ -155,7 +155,9 @@ UTF-8编码报错问题，指定编码格式
 ```python
 with open(file_path, 'w', encoding='utf-8') as f:
 ```
-
+windows下 中文路径的python读写会产生乱码，GBK是windows编码格式，而不是utf-8
+这个问题的原因在于，Windows 系统默认的编码方式是 ‘gbk’，而不是 ‘utf-8’。
+当你用 ‘utf-8’ 编码写入文件，然后用默认的 ‘gbk’ 编码打开文件时，就会出现乱码。
 ##  Reference
 
 这部分代码来自 https://github.com/pagekeytech/onenote-to-markdown 。
