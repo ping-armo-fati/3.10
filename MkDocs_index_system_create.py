@@ -7,7 +7,7 @@ docs_dir = Path('./file_source')
 def tribe_idx_build(top_dir):
     # 遍历顶级目录下的所有子目录
     for sub_dir in top_dir.iterdir():
-        if sub_dir.is_dir():
+        if sub_dir.is_dir() and sub_dir.name != 'assets':
             # 在每个Sub*目录下的所有Tribe*目录中创建index.md文件
 
             for tribe_dir in sub_dir.iterdir():
@@ -39,7 +39,7 @@ def tribe_idx_build(top_dir):
 def sub_idx_build(top_dir):
     for sub_dir in top_dir.iterdir():
         # 遍历每一个Sub文件
-        if sub_dir.is_dir():
+        if sub_dir.is_dir() and sub_dir.name != 'assets':
             # 在每个Sub*目录下创建index.md文件
             index_file_path = sub_dir / 'index.md'
             index_file_path.touch(exist_ok=True)
@@ -80,7 +80,7 @@ def docs_idx_build(top_dir):
         f.write("****\n")
         # 在每个Sub*目录下的所有Tribe*目录中添加链接
         for sub_dir in top_dir.iterdir():
-            if sub_dir.is_dir():
+            if sub_dir.is_dir() and sub_dir.name != 'assets':
                 sub_dir_title = sub_dir.name.split('.', 1)[-1]
                 f.write(f"  - [{sub_dir_title}]({sub_dir.name}/index.md)\n")
         f.write("****\n")
@@ -103,7 +103,7 @@ def yaml_nav_build(top_dir):
         f.write(f"  - Home: index.md\n")
         # 在每个Sub*目录下的所有Tribe*目录中添加链接
         for sub_dir in top_dir.iterdir():
-            if sub_dir.is_dir():
+            if sub_dir.is_dir() and sub_dir.name != 'assets':
                 sub_dir_title = sub_dir.name.split('.', 1)[-1]
                 f.write(f"  - {sub_dir_title}: \n")
                 f.write(f"    - Contents: '{sub_dir.name}/index.md'\n")

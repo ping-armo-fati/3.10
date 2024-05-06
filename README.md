@@ -137,7 +137,13 @@ python MkDocs_index_system_create.py
       - 写入：Contents：sub-index 路径
       - 遍历三级目录
         - 写入： 目录名 ： tribe-index 路径
-    
+### 代码更新
+
+- 避免扫描assets文件：
+
+```python
+    if sub_dir.is_dir() and sub_dir.name != 'assets':
+```
 
 ##  Reference
 
