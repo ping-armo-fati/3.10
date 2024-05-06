@@ -1,6 +1,6 @@
 # OneNote导出成Markdown文件
 
-## Dependence
+## 依赖
 - pandoc
 - requirements 
 
@@ -8,7 +8,7 @@
 pip install -r requirements.txt
 ```
 
-## 步骤
+## 使用步骤
 - 打开OneNote及相关笔记本
 > （注意，需要是OneNote 2016，不能是OneNote For Win10之类的版本，详情查看 https://support.microsoft.com/zh-cn/office/onenote-%E7%89%88%E6%9C%AC%E6%9C%89%E4%BD%95%E5%8C%BA%E5%88%AB-a624e692-b78b-4c09-b07f-46181958118f ）
 
@@ -18,14 +18,25 @@ pip install -r requirements.txt
 ```bash
 # One Note  to MD files
 python convert.py
+```
+
+- 你的笔记应该转化成了markdown文件并存在 `~/Desktop/OneNoteExport`. 建议用[obsidian](https://obsidian.md)管理markdown笔记！
+
+### 编辑MarkDown Notes Files 
+
+- 脚本运行
+```bash
 # MD files Editor : change img path ; delete used img ; rename img
 python markdown_image_editor.py
 # Markdown system index create for MkDocs
 python MkDocs_index_system_create.py
 ```
-
-- 你的笔记应该转化成了markdown文件并存在 `~/Desktop/OneNoteExport`. 建议用[obsidian](https://obsidian.md)管理markdown笔记！
-
+- 建议操作顺序
+  - 生成系统目录-index.md 
+  - 图片替换符修正-相对路径
+  - 清除无用图片
+  - 重命名图片（in bugs）
+  - 
 ## 开发日志
 
 ### 整体任务描述
@@ -64,9 +75,10 @@ python MkDocs_index_system_create.py
   - `Sub:index.md`
     ```markdown
     # Sub
+    ****
+    ****
     - [Tribe1](Tribe1/index.md)
     - [Tribe2](Tribe2/index.md)
-    ****
     ****
     # OverView
     ****
@@ -84,7 +96,6 @@ python MkDocs_index_system_create.py
       - sub1: 
         - Contents: sub1/index.md
         - Tribe1: sub1/Tribe1/index.md
-    ............. 
     ```
 
   - `docs:index.md`
@@ -96,6 +107,37 @@ python MkDocs_index_system_create.py
     ## [Sub2](Sub2/index.md)
     ......
     ```
+    
+- 代码逻辑
+  - Tribe-index-create
+    - 遍历目录
+    - 创建`index.md`
+    - 清空内容
+    - 写入二级目录标题、分割线
+    - 写入当前目录所有`.md`文档链接，并掐掉其文件"x."前缀
+    - 写入分割线
+  - Sub-Index-create
+    - 遍历目录
+    - 创建`index.md`
+    - 清空内容
+    - 写入一级目录标题、分割线
+    - 写入当前目录所有子目录(3-class)的`index.md`文档链接，并掐掉`Tribe*`前缀
+    - 写入分割线
+  - Docs-index-create
+    - 创建`index.md`
+    - 清空内容
+    - 写入Home、分割线
+    - 写入当前目录所有子目录(2-class)的`index.md`文档链接，并掐掉`sub*`前缀
+    - 写入分割线
+  - yaml-nav-create
+    - 创建`nav.yaml`
+    - 清空内容
+    - 写入nav,Home链接
+    - 遍历二级目录
+      - 写入：Contents：sub-index 路径
+      - 遍历三级目录
+        - 写入： 目录名 ： tribe-index 路径
+    
 
 ##  Reference
 
